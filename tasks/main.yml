@@ -1,7 +1,8 @@
 - name: JetForce | Install
   ansible.builtin.pip:
     name: jetforce
-    virtualenv: "{{ jetforce_install_dir }}"
+    virtualenv: "{{ jetforce_virtualenv_dir }}"
+    virtualenv_python: "{{ jetforce_virtualenv_python }}"
   notify: Reload JetForce Service
 
 - name: JetForce | Content Directory

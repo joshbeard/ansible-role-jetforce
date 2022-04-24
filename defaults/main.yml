@@ -1,5 +1,6 @@
 # Path to install the virtual environment
-jetforce_install_dir: /srv/jetforce
+jetforce_virtualenv_dir: /srv/jetforce
+jetforce_virtualenv_python: python
 
 # Path to serve content from
 jetforce_content_dir: /var/jetforce
@@ -15,6 +16,7 @@ jetforce_hostname: ''
 
 # Path to install the systemd service file
 jetforce_service_conf: /etc/systemd/system/jetforce.service
+
 
 # Paths to TLS files. Optional.
 #jetforce_tls_keyfile:
