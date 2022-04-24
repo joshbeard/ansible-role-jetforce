@@ -1,0 +1,5 @@
+- name: Reload JetForce Service
+  ansible.builtin.systemd:
+    name: jetforce.service
+    state: restarted
+    daemon_reload: yes

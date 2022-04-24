@@ -1,0 +1,26 @@
+# /etc/systemd/system/jetforce.service
+[Unit]
+Description=Jetforce Server
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=5
+Environment="PYTHONUNBUFFERED=1"
+ExecStart={{ jetforce_install_dir }}/bin/jetforce \
+    --host {{ jetforce_listen_addr }} \
+    --port {{ jetforce_port }} \
+    --hostname {{ jetforce_hostname }} \
+    {% if jetforce_tls_certfile is defined %}
+    --tls-certfile {{ jetforce_tls_certfile }} \
+    {% endif %}
+    {% if jetforce_tls_keyfile is defined %}
+    --tls-keyfile {{ jetforce_tls_keyfile }} \
+    {% endif %}
+    {% if jetforce_tls_cafile is defined %}
+    --tls-cafile {{ jetforce_tls_cafile }} \
+    {% endif %}
+    --dir {{ jetforce_content_dir }}
+
+[Install]
+WantedBy=default.target

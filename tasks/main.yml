@@ -1,0 +1,28 @@
+- name: JetForce | Install
+  ansible.builtin.pip:
+    name: jetforce
+    virtualenv: "{{ jetforce_install_dir }}"
+  notify: Reload JetForce Service
+
+- name: JetForce | Content Directory
+  ansible.builtin.file:
+    path: "{{ jetforce_content_dir }}"
+    state: directory
+    owner: root
+    group: 0
+  notify: Reload JetForce Service
+
+- name: JetForce | Systemd Service Config
+  ansible.builtin.template:
+    src: jetforce.service
+    dest: "{{ jetforce_service_conf }}"
+    mode: '0644'
+    owner: root
+    group: 0
+  notify: Reload JetForce Service
+
+- name: JetForce | Service
+  ansible.builtin.systemd:
+    state: started
+    daemon_reload: yes
+    name: jetforce
